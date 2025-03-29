@@ -84,7 +84,7 @@ export function HomeCard() {
           </p>
           <Button
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 
-                  border-none shadow-lg shadow-blue-700/30 group-hover:shadow-blue-700/50 transition-all duration-300"
+                  border-none shadow-lg shadow-blue-700/30 group-hover:shadow-blue-700/50 transition-all duration-300 text-white font-semibold"
           >
             Unirse a la partida
           </Button>
