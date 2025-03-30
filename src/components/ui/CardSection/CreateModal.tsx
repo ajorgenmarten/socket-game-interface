@@ -67,7 +67,7 @@ export function CreateModal() {
               <Button
                 disabled={loading}
                 type="submit"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 w-full col-span-2 md:col-span-1 disabled:opacity-50"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 w-full col-span-2 md:col-span-1 disabled:opacity-50"
               >
                 Crear
               </Button>
