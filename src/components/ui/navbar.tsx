@@ -1,6 +1,6 @@
 import { Gamepad } from "../icons/gamepad";
 import { Users } from "../icons/users";
-import { useGame } from "../providers/game";
+import { useGame } from "../../providers/game";
 
 export function Navbar() {
   const { playersOnline } = useGame();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button } from "../components/Button";
-import { Copy } from "../icons/copy";
+import { Button } from "../components/ui/Button";
+import { Copy } from "../components/icons/copy";
 import { useGame } from "../providers/game";
 
 export function WaitingRival() {
@@ -16,11 +16,11 @@ export function WaitingRival() {
 }
 
 function WaitingCard() {
-  const { currentGameCode, waitTimeOut } = useGame();
+  const { currentGameState, waitTimeOut } = useGame();
   const [timeLeft, setTimeLeft] = useState(40);
   const [animationFrame, setAnimationFrame] = useState(0);
   const copyGameCode = () => {
-    navigator.clipboard.writeText(currentGameCode as string);
+    navigator.clipboard.writeText(currentGameState.code as string);
   };
   useEffect(() => {
     if (timeLeft > 0) {
@@ -55,7 +55,7 @@ function WaitingCard() {
         </div>
         <div className="flex items-center justify-center gap-3">
           <div className="text-4xl uppercase font-mono font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
-            {currentGameCode}
+            {currentGameState.code}
           </div>
           <Button
             className="rounded-full text-purple-400 hover:text-white hover:bg-purple-900/50"

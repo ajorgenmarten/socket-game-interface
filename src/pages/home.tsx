@@ -1,6 +1,6 @@
-import { HeroText } from "../components/hero-text";
-import { HomeCard } from "../components/home-card";
-import { Navbar } from "../components/navbar";
+import { HeroText } from "../components/ui/HeroText";
+import { CardSection } from "../components/ui/CardSection/index";
+import { Navbar } from "../components/ui/navbar";
 
 export function HomePage() {
   return (
@@ -8,7 +8,7 @@ export function HomePage() {
       <Navbar />
       <div className="px-8 py-4">
         <HeroText />
-        <HomeCard />
+        <CardSection />
       </div>
     </main>
   );
