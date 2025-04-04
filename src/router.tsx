@@ -1,10 +1,9 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from "react-router";
-import { HomePage } from "./pages/home";
-import { WaitingRival } from "./pages/waiting-rival";
 import { SetNumber } from "./pages/set-number";
 import { CanStayInHomeScreen } from "./components/logic/CanStayInHomeScreen";
 import { CanStayInWaitScreen } from "./components/logic/CantStayInWaitScreen";
 import { CanStayInSetNumberScreen } from "./components/logic/CanStayInSetNumberScreen";
+import { HomePage } from "./pages/Home";
 
 const routes: RouteObject[] = [
   {
@@ -18,17 +17,17 @@ const routes: RouteObject[] = [
   {
     path: "/game",
     element: (
-        <CanStayInWaitScreen>
-          <WaitingRival />
-        </CanStayInWaitScreen>
+      <CanStayInWaitScreen>
+        <HomePage />
+      </CanStayInWaitScreen>
     ),
   },
   {
     path: "/set-number",
     element: (
-        <CanStayInSetNumberScreen>
-          <SetNumber />
-        </CanStayInSetNumberScreen>
+      <CanStayInSetNumberScreen>
+        <SetNumber />
+      </CanStayInSetNumberScreen>
     ),
   },
 ];

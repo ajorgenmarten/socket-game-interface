@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "../components/ui/Button";
-import { Copy } from "../components/icons/copy";
-import { useGame } from "../providers/game";
+import { Button } from "../../components/ui/Button";
+import { Copy } from "../../components/icons/copy";
+import { useGame } from "../../providers/game";
 
 export function WaitingRival() {
   return (
@@ -32,7 +32,7 @@ function WaitingCard() {
     if (timeLeft === 0) {
       waitTimeOut();
     }
-  }, [timeLeft]);
+  }, [timeLeft, waitTimeOut]);
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimationFrame((prev) => (prev + 1) % 100);
