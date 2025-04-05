@@ -11,6 +11,3 @@
 .custom-card-img {
   @apply absolute top-0 left-0 w-full h-full object-cover opacity-80;
 }
-.custom-card-overlay {
-  @apply transition duration-500 bg-black/50 h-full w-full backdrop-blur-[.6px];
-}
