@@ -1,9 +1,8 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from "react-router";
-import { SetNumber } from "./pages/set-number";
 import { CanStayInHomeScreen } from "./components/logic/CanStayInHomeScreen";
-import { CanStayInSetNumberScreen } from "./components/logic/CanStayInSetNumberScreen";
 import { HomePage } from "./pages/Home";
 import { WaitForRival } from "./pages/WaitForRival";
+import { SetSecretNumber } from "./pages/SetSecretNumber";
 
 const routes: RouteObject[] = [
   {
@@ -22,12 +21,8 @@ const routes: RouteObject[] = [
   },
   {
     path: "/set-number",
-    element: (
-      <CanStayInSetNumberScreen>
-        <SetNumber />
-      </CanStayInSetNumberScreen>
-    ),
-  },
+    element: <SetSecretNumber />
+  }
 ];
 
 const router = createBrowserRouter(routes);

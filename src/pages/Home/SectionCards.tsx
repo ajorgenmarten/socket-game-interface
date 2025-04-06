@@ -14,7 +14,7 @@ export function SectionCards() {
 
 export function CreateGameCard() {
   return (
-    <div className="custom-card h-[250px] group border-2 border-primary/50">
+    <div className="custom-card h-[250px] group border-2 border-primary/50 select-none">
       <img src={createImg} alt="Crear partida" className="custom-card-img" />
       <div className="transition duration-500 bg-black/50 h-full w-full backdrop-blur-[.6px] group-hover:backdrop-blur-[2px] group-hover:bg-black/60">
         <div className="flex flex-col items-center justify-between h-full w-full p-6">
@@ -31,7 +31,7 @@ export function CreateGameCard() {
 
 export function JoinGameCard() {
   return (
-    <div className="custom-card h-[250px] group border-2 border-orange-500/50">
+    <div className="custom-card h-[250px] group border-2 border-orange-500/50 select-none">
       <img src={joinImg} alt="Crear partida" className="custom-card-img" />
       <div className="transition duration-500 bg-black/50 h-full w-full backdrop-blur-[.6px] group-hover:backdrop-blur-[2px] group-hover:bg-black/60">
         <div className="flex flex-col items-center justify-between h-full w-full p-6">
