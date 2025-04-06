@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Numbers } from "../../components/ui/Numbers";
+import { useGame } from "../../providers/game";
 
 export function SetSecretNumber() {
+  const { sendSecretNumber, rivalIsReady } = useGame();
   return (
     <div className="min-h-screen pt-8 px-2">
       <div className="flex flex-col justify-center items-center p-4 py-8 max-w-full w-sm mx-auto rounded-xl bg-base-200 border-2 border-primary/50">
@@ -10,6 +12,10 @@ export function SetSecretNumber() {
             Codigo secreto
           </h1>
           <p className="text-base-content/70">Establece tu número secreto</p>
+          <p>
+            Rival:
+            {rivalIsReady ? "✔ listo" : "❌ todavía no está listo"}
+          </p>
         </div>
         <SetSquares />
       </div>

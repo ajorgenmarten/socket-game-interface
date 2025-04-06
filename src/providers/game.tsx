@@ -6,8 +6,10 @@ function useGameHook() {
   const [playersOnline, setPlayersOnline] = useState(0);
   const [gameCode, setGameCode] = useState<null | string>(null);
   const [setNumberStage, setSetNumberStage] = useState(false);
+  const [rivalIsReady, setRivalIsReady] = useState(false);
   const [waitingStage, setWaitingStage] = useState(false);
   const [playingStage, setPlayingStage] = useState(false);
+  const [secretNumber, setSecretNubmer] = useState<string | null>(null);
   const [isMyTurn, setMyTurn] = useState(false);
   const [rivalIsThinking, setRivalIsThinking] = useState(false);
   const [matchNotes, setMatchNotes] = useState<Note[]>([]);
@@ -24,7 +26,7 @@ function useGameHook() {
   const joinToGame = (code: string) => {
     socket.emit("join-game", code);
   };
-  const setSecretNumber = (number: string, gameCode: string) => {
+  const sendSecretNumber = (number: string, gameCode: string) => {
     socket.emit("set-secret-number", number, gameCode);
   }
 
@@ -42,12 +44,24 @@ function useGameHook() {
     socket.on('online-status', (count: number) => {
       setPlayersOnline(count);
     })
+    socket.on('number-setted', (number: string) => {
+      setSecretNubmer(number)
+    })
+    socket.on('rival-is-ready', () => {
+      setRivalIsReady(true)
+    })
+    socket.on('game-started', (turn: boolean) => {
+      setMyTurn(turn)
+      setStage('playing')
+    })
     return () => {
       socket.disconnect();
     };
   }, [socket]);
 
   return {
+    rivalIsReady,
+    secretNumber,
     playersOnline,
     gameCode,
     playingStage,
@@ -58,11 +72,13 @@ function useGameHook() {
     matchNotes,
     createGame,
     joinToGame,
-    setSecretNumber
+    sendSecretNumber
   };
 }
 
 const GameContext = createContext<ReturnType<typeof useGameHook>>({
+  rivalIsReady: false,
+  secretNumber: null,
   playersOnline: 0,
   gameCode: null,
   playingStage: false,
@@ -73,7 +89,7 @@ const GameContext = createContext<ReturnType<typeof useGameHook>>({
   matchNotes: [],
   createGame: () => {},
   joinToGame: () => {},
-  setSecretNumber: () => {}
+  sendSecretNumber: () => {},
 });
 
 export function useGame() {
