@@ -3,27 +3,40 @@ import { HomePage } from "./pages/Home";
 import { WaitForRival } from "./pages/WaitForRival";
 import { SetSecretNumber } from "./pages/SetSecretNumber";
 import { Game } from "./pages/Game";
+import { StageFilter } from "./components/logic/StageFilter";
 
 const routes: RouteObject[] = [
   {
     path: "/",
     element: (
+      <StageFilter>
         <HomePage />
+      </StageFilter>
     ),
   },
   {
     path: "/wait-room",
     element: (
+      <StageFilter>
         <WaitForRival />
+      </StageFilter>
     ),
   },
   {
     path: "/set-number",
-    element: <SetSecretNumber />
+    element: (
+      <StageFilter>
+        <SetSecretNumber />
+      </StageFilter>
+    )
   },
   {
     path: '/game',
-    element: <Game />
+    element: (
+      <StageFilter>
+        <Game />
+      </StageFilter>
+    )
   }
 ];
 

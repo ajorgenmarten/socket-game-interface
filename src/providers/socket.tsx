@@ -12,11 +12,16 @@ function useSocketHook() {
   );
 
   useEffect(() => {
+    window.addEventListener("beforeunload", async (e) => {
+      e.preventDefault();
+    })
+    window.addEventListener("beforeend", async (e) => {
+      e.preventDefault()
+    })
     socket.connect();
     socket.on("connect", () => {
       console.log("Connected to socket.io server");
     });
-
     socket.on("disconnect", () => {
       console.log("Disconnected from socket.io server");
     });
