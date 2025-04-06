@@ -18,8 +18,7 @@ export function JoinToGameModal() {
   return (
     <Modal id="join-game-modal">
       <h2 className="flex items-center gap-2 text-xl mb-5 text-base-content/50">
-        <ArrowRight className="size-5 inline transform translate-y-[.5px]" /> Crear
-        partida
+        <ArrowRight className="size-5 inline transform translate-y-[.5px]" /> Unirse a una partida
       </h2>
       <form onSubmit={onSubmit}>
         <div className="bg-base-300 p-4 rounded-xl">
