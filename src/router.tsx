@@ -2,6 +2,7 @@ import { RouteObject, RouterProvider, createBrowserRouter } from "react-router";
 import { HomePage } from "./pages/Home";
 import { WaitForRival } from "./pages/WaitForRival";
 import { SetSecretNumber } from "./pages/SetSecretNumber";
+import { Game } from "./pages/Game";
 
 const routes: RouteObject[] = [
   {
@@ -19,6 +20,10 @@ const routes: RouteObject[] = [
   {
     path: "/set-number",
     element: <SetSecretNumber />
+  },
+  {
+    path: '/game',
+    element: <Game />
   }
 ];
 

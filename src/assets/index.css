@@ -4,10 +4,28 @@
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-br from-orange-200 to-rose-400;
 }
+.animate-pulse {
+  animation-name: mypulse;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
 
 .custom-card {
   @apply relative w-full max-w-80 overflow-hidden rounded-xl shadow-md transition duration-500 hover:shadow-2xl rotate-x-12 -rotate-y-12 hover:rotate-x-0 hover:rotate-y-0;
 }
 .custom-card-img {
   @apply absolute top-0 left-0 w-full h-full object-cover opacity-80;
+}
+
+@keyframes mypulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

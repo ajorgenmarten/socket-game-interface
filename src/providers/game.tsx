@@ -10,7 +10,7 @@ function useGameHook() {
   const [playingStage, setPlayingStage] = useState(false);
   const [isMyTurn, setMyTurn] = useState(false);
   const [rivalIsThinking, setRivalIsThinking] = useState(false);
-  const [matchNotes, setMatchNotes] = useState<string[]>([]);
+  const [matchNotes, setMatchNotes] = useState<Note[]>([]);
   
   const setStage = (exclude?: "set-number" | "waiting" | "playing") => {
     setPlayingStage(exclude == "playing" ? true : false)
@@ -93,3 +93,13 @@ interface IGame {
   ownerSocketId: string;
   joinedSocketId: string | null;
 }
+
+/**
+ * @type {string} Numbero para adivinar el del rival
+ */
+type Value = string
+/**
+ * @type {number} Cantidad de aciertos
+ */
+type Asserts = number
+type Note = [Value, Asserts]
