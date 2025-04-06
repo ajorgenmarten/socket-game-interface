@@ -1,65 +1,79 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { ErrorData, useSocket } from "./socket";
+import { useSocket } from "./socket";
 
 function useGameHook() {
   const { socket } = useSocket();
   const [playersOnline, setPlayersOnline] = useState(0);
-  const [currentGameState, setCurrentGameState] = useState({
-    code: null as (string | null),
-    started: false,
-    myNumber: null as (string | null),
-    attempts: [] as string[]
-  })
+  const [gameCode, setGameCode] = useState<null | string>(null);
+  const [setNumberStage, setSetNumberStage] = useState(false);
+  const [waitingStage, setWaitingStage] = useState(false);
+  const [playingStage, setPlayingStage] = useState(false);
+  const [isMyTurn, setMyTurn] = useState(false);
+  const [rivalIsThinking, setRivalIsThinking] = useState(false);
+  const [matchNotes, setMatchNotes] = useState<string[]>([]);
+  
+  const setStage = (exclude?: "set-number" | "waiting" | "playing") => {
+    setPlayingStage(exclude == "playing" ? true : false)
+    setWaitingStage(exclude == "waiting" ? true : false)
+    setSetNumberStage(exclude == "set-number" ? true : false)
+  }
 
-
-  function createGame(code: string) {
+  const createGame = (code: string) => {
     socket.emit("create-game", code);
+  };
+  const joinToGame = (code: string) => {
+    socket.emit("join-game", code);
+  };
+  const setSecretNumber = (number: string, gameCode: string) => {
+    socket.emit("set-secret-number", number, gameCode);
   }
-  function waitTimeOut() {
-    socket.emit("game-waiting-timeout", currentGameState.code);
-  }
-  function joinToGame(code: string) {
-    socket.emit("join-game", code)
-  }
-  useEffect(() => {
-    socket.on("online-status", function (count: number) {
-      setPlayersOnline(count);
-    });
-    socket.on("game-created", function (gameCode: string) {
-      setCurrentGameState({...currentGameState, code: gameCode});
-    });
-    socket.on("rival-disconnected", function () {
-      setCurrentGameState({...currentGameState, code: null});
-    });
-    socket.on("game-waiting-timeout", function () {
-      setCurrentGameState({...currentGameState, code: null});
-    });
-    socket.on("game-started", function () {
-      setCurrentGameState({
-        ...currentGameState,
-        started: true,
-      });
-    });
-    socket.on("error", function (data: ErrorData) {
-      console.log(data)
-    });
 
+  useEffect(() => {
+    socket.on("game-created", (game: IGame) => {
+      console.log("game created", game);
+      setGameCode(game.code);
+      setStage('waiting');
+    });
+    socket.on("joined-to-game", (game: IGame) => {
+      console.log("joined to game", game);
+      setGameCode(game.code);
+      setStage('set-number');
+    })
+    socket.on('online-status', (count: number) => {
+      setPlayersOnline(count);
+    })
+    return () => {
+      socket.disconnect();
+    };
   }, [socket]);
 
-  return { createGame, playersOnline, currentGameState, waitTimeOut, joinToGame };
+  return {
+    playersOnline,
+    gameCode,
+    playingStage,
+    setNumberStage,
+    waitingStage,
+    isMyTurn,
+    rivalIsThinking,
+    matchNotes,
+    createGame,
+    joinToGame,
+    setSecretNumber
+  };
 }
 
 const GameContext = createContext<ReturnType<typeof useGameHook>>({
-  createGame: () => {},
   playersOnline: 0,
-  currentGameState: {
-    code: null,
-    started: false,
-    myNumber: "",
-    attempts: []
-  },
+  gameCode: null,
+  playingStage: false,
+  setNumberStage: false,
+  waitingStage: false,
+  isMyTurn: false,
+  rivalIsThinking: false,
+  matchNotes: [],
+  createGame: () => {},
   joinToGame: () => {},
-  waitTimeOut: () => {},
+  setSecretNumber: () => {}
 });
 
 export function useGame() {
@@ -72,4 +86,10 @@ export function GameProvider(props: React.PropsWithChildren) {
       {props.children}
     </GameContext.Provider>
   );
+}
+
+interface IGame {
+  code: string;
+  ownerSocketId: string;
+  joinedSocketId: string | null;
 }

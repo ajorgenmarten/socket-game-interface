@@ -1,5 +1,4 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from "react-router";
-import { CanStayInHomeScreen } from "./components/logic/CanStayInHomeScreen";
 import { HomePage } from "./pages/Home";
 import { WaitForRival } from "./pages/WaitForRival";
 import { SetSecretNumber } from "./pages/SetSecretNumber";
@@ -8,9 +7,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: (
-      <CanStayInHomeScreen>
         <HomePage />
-      </CanStayInHomeScreen>
     ),
   },
   {
