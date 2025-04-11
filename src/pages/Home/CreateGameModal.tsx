@@ -15,19 +15,24 @@ export function CreateGameModal() {
   const [randomCode, setRandomCode] = useState(genRandomCode());
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRandomCode(e.target.value.toUpperCase().trim());
-  }
+  };
   const regenerate = () => {
     setRandomCode(genRandomCode());
-  }
-  const close = () => (document.getElementById("create-game-modal") as HTMLDialogElement)?.close();
+  };
+  const close = () =>
+    (
+      document.getElementById("create-game-modal") as HTMLDialogElement
+    )?.close();
   const copy = () => {
     navigator.clipboard.writeText(randomCode);
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    console.log("llamando el crear juego");
     createGame(randomCode);
-  }
+    setLoading(false);
+  };
   return (
     <Modal id="create-game-modal">
       <h2 className="flex items-center gap-2 text-xl mb-5 text-base-content/50">
@@ -59,8 +64,11 @@ export function CreateGameModal() {
         </div>
         <div className="grid grid-cols-3 gap-3 my-4">
           <button className="btn btn-primary" disabled={loading}>
-            { loading && <span className="loading loading-spinner loading-xs"></span>}
-            Crear</button>
+            {loading && (
+              <span className="loading loading-spinner loading-xs"></span>
+            )}
+            Crear
+          </button>
           <button
             className="btn btn-secondary"
             type="button"

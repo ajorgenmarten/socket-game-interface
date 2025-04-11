@@ -12,13 +12,22 @@ function useGameHook() {
   const [secretNumber, setSecretNubmer] = useState<string | null>(null);
   const [isMyTurn, setMyTurn] = useState(false);
   const [rivalIsThinking, setRivalIsThinking] = useState(false);
-  const [matchNotes, setMatchNotes] = useState<Note[]>([]);
-  
+  const [matchNotes, setMatchNotes] = useState<Note[]>([ ["1635", 2] ]);
+
   const setStage = (exclude?: "set-number" | "waiting" | "playing") => {
-    setPlayingStage(exclude == "playing" ? true : false)
-    setWaitingStage(exclude == "waiting" ? true : false)
-    setSetNumberStage(exclude == "set-number" ? true : false)
-  }
+    setPlayingStage(exclude == "playing" ? true : false);
+    setWaitingStage(exclude == "waiting" ? true : false);
+    setSetNumberStage(exclude == "set-number" ? true : false);
+  };
+  const disconnect = () => {
+    setRivalIsReady(false);
+    setSecretNubmer(null);
+    setGameCode(null);
+    setMyTurn(false);
+    setRivalIsThinking(false);
+    setMatchNotes([]);
+    setStage();
+  };
 
   const createGame = (code: string) => {
     socket.emit("create-game", code);
@@ -28,32 +37,36 @@ function useGameHook() {
   };
   const sendSecretNumber = (number: string, gameCode: string) => {
     socket.emit("set-secret-number", number, gameCode);
-  }
+  };
+  const waitTimeOut = () => {
+    socket.emit("wait-timeout");
+    disconnect();
+  };
 
   useEffect(() => {
     socket.on("game-created", (game: IGame) => {
       console.log("game created", game);
       setGameCode(game.code);
-      setStage('waiting');
+      setStage("waiting");
     });
     socket.on("joined-to-game", (game: IGame) => {
       console.log("joined to game", game);
       setGameCode(game.code);
-      setStage('set-number');
-    })
-    socket.on('online-status', (count: number) => {
+      setStage("set-number");
+    });
+    socket.on("online-status", (count: number) => {
       setPlayersOnline(count);
-    })
-    socket.on('number-setted', (number: string) => {
-      setSecretNubmer(number)
-    })
-    socket.on('rival-is-ready', () => {
-      setRivalIsReady(true)
-    })
-    socket.on('game-started', (turn: boolean) => {
-      setMyTurn(turn)
-      setStage('playing')
-    })
+    });
+    socket.on("number-setted", (number: string) => {
+      setSecretNubmer(number);
+    });
+    socket.on("rival-is-ready", () => {
+      setRivalIsReady(true);
+    });
+    socket.on("game-started", (turn: boolean) => {
+      setMyTurn(turn);
+      setStage("playing");
+    });
     return () => {
       socket.disconnect();
     };
@@ -72,7 +85,8 @@ function useGameHook() {
     matchNotes,
     createGame,
     joinToGame,
-    sendSecretNumber
+    sendSecretNumber,
+    waitTimeOut,
   };
 }
 
@@ -90,6 +104,7 @@ const GameContext = createContext<ReturnType<typeof useGameHook>>({
   createGame: () => {},
   joinToGame: () => {},
   sendSecretNumber: () => {},
+  waitTimeOut: () => {},
 });
 
 export function useGame() {
@@ -113,9 +128,9 @@ interface IGame {
 /**
  * @type {string} Numbero para adivinar el del rival
  */
-type Value = string
+type Value = string;
 /**
  * @type {number} Cantidad de aciertos
  */
-type Asserts = number
-type Note = [Value, Asserts]
+type Asserts = number;
+type Note = [Value, Asserts];
