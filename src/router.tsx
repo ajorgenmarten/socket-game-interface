@@ -4,6 +4,8 @@ import { Layout } from "./components/Layout";
 import { CreateGame } from "./components/CreateGame";
 import { JoinGame } from "./components/JoinGame";
 import { SetNumber } from "./components/SetNumber";
+import { GameLose } from "./components/GameLose";
+import { GameWin } from "./components/GameWin";
 
 const routes: RouteObject[] = [
   {
@@ -25,6 +27,14 @@ const routes: RouteObject[] = [
       {
         path: "set-number",
         element: <SetNumber />,
+      },
+      {
+        path: "losser",
+        element: <GameLose />,
+      },
+      {
+        path: "winner",
+        element: <GameWin />,
       }
     ],
   },
