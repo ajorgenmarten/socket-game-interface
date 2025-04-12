@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import "./assets/index.css";
-// import App from "./App.tsx";
-import { TestSocketComponent } from "./Test.tsx";
+import { RouterApp } from "./router.tsx";
 
-createRoot(document.getElementById("root")!).render(<TestSocketComponent />);
+createRoot(document.getElementById("root")!).render(<RouterApp />);

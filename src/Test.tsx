@@ -23,11 +23,11 @@ const SOCKET_LISTEN_EVENTS = {
     ERROR: 'error',
 };
 
-function CreateGame(code: string) {
+export function CreateGame(code: string) {
     socket.emit("create-game", code)
 }
 
-function JoinGame(code: string) {
+export function JoinGame(code: string) {
     socket.emit("join-game", code)
 }
 

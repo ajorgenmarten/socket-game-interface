@@ -1,43 +1,28 @@
-import { RouteObject, RouterProvider, createBrowserRouter } from "react-router";
-import { HomePage } from "./pages/Home";
-import { WaitForRival } from "./pages/WaitForRival";
-import { SetSecretNumber } from "./pages/SetSecretNumber";
-import { Game } from "./pages/Game";
-import { StageFilter } from "./components/logic/StageFilter";
+import { createBrowserRouter, RouteObject, RouterProvider } from "react-router";
+import App from "./App";
+import { Layout } from "./components/Layout";
+import { CreateGame } from "./components/CreateGame";
+import { JoinGame } from "./components/JoinGame";
 
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: (
-      <StageFilter>
-        <HomePage />
-      </StageFilter>
-    ),
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <App />,
+      },
+      {
+        path: "create",
+        element: <CreateGame />,
+      },
+      {
+        path: "join",
+        element: <JoinGame />,
+      },
+    ],
   },
-  {
-    path: "/wait-room",
-    element: (
-      <StageFilter>
-        <WaitForRival />
-      </StageFilter>
-    ),
-  },
-  {
-    path: "/set-number",
-    element: (
-      <StageFilter>
-        <SetSecretNumber />
-      </StageFilter>
-    )
-  },
-  {
-    path: '/game',
-    element: (
-      <StageFilter>
-        <Game />
-      </StageFilter>
-    )
-  }
 ];
 
 const router = createBrowserRouter(routes);
