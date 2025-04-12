@@ -10,7 +10,7 @@ const routes: RouteObject[] = [
     path: "/",
     element: (
       <StageFilter>
-        <Game />
+        <HomePage />
       </StageFilter>
     ),
   },

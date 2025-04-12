@@ -3,7 +3,7 @@ import { Numbers } from "../../components/ui/Numbers";
 import { useGame } from "../../providers/game";
 
 export function SetSecretNumber() {
-  const { sendSecretNumber, rivalIsReady } = useGame();
+  const { rivalIsReady } = useGame();
   return (
     <div className="min-h-screen pt-8 px-2">
       <div className="flex flex-col justify-center items-center p-4 py-8 max-w-full w-sm mx-auto rounded-xl bg-base-200 border-2 border-primary/50">
