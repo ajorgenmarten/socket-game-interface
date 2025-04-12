@@ -31,7 +31,7 @@ export function JoinGame(code: string) {
     socket.emit("join-game", code)
 }
 
-function SetNumber(code: string, number: string) {
+export function SetNumber(code: string, number: string) {
     socket.emit('set-number', { code, number })
 }
 

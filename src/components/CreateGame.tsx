@@ -2,21 +2,33 @@ import { FormEvent, useState } from 'react';
 import { CreateGame as CreateGameSocket } from '../Test';
 import createMatchBg from '../assets/create-match.jpg';
 import { useNavigate } from 'react-router';
+import { WaitingRoom } from './WaitingRoom';
 
 export function CreateGame() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [code, setCode] = useState('');
+    const [isWaiting, setIsWaiting] = useState(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
         try {
             await CreateGameSocket(code);
+            setIsWaiting(true);
         } finally {
             setIsLoading(false);
         }
     };
+
+    const handleCancelWaiting = () => {
+        setIsWaiting(false);
+        setCode('');
+    };
+
+    if (isWaiting) {
+        return <WaitingRoom code={code} onCancel={handleCancelWaiting} />;
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"

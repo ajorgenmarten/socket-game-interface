@@ -3,6 +3,7 @@ import App from "./App";
 import { Layout } from "./components/Layout";
 import { CreateGame } from "./components/CreateGame";
 import { JoinGame } from "./components/JoinGame";
+import { SetNumber } from "./components/SetNumber";
 
 const routes: RouteObject[] = [
   {
@@ -21,6 +22,10 @@ const routes: RouteObject[] = [
         path: "join",
         element: <JoinGame />,
       },
+      {
+        path: "set-number",
+        element: <SetNumber />,
+      }
     ],
   },
 ];
