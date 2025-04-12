@@ -2,11 +2,12 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { SetNumber as SetNumberSocket } from '../Test';
 import joinMatchBg from '../assets/join-match.jpg';
+import { SetNumberInput } from './SetNumberInput';
 
 export function SetNumber() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [number, setNumber] = useState('');
+    const [number] = useState('');
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,11 +28,6 @@ export function SetNumber() {
         if (num[0] === '0') return false;
         const digits = new Set(num.split(''));
         return digits.size === 4;
-    };
-
-    const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
-        setNumber(value);
     };
 
     return (
@@ -56,7 +52,7 @@ export function SetNumber() {
                     className="group absolute left-6 top-6 bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-2.5 px-6 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-600 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3"
                 >
                     <span className="text-xl transform group-hover:-translate-x-1 transition-transform duration-300">←</span>
-                    <span>Volver</span>
+                    <span>Salir</span>
                 </button>
 
                 <h2 className="mt-12 text-5xl font-bold mb-8 text-center bg-gradient-to-r from-purple-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-sm">Número Secreto</h2>
@@ -71,17 +67,7 @@ export function SetNumber() {
                         <label htmlFor="number" className="block text-lg font-medium text-white/90">
                             Tu Número Secreto
                         </label>
-                        <input
-                            type="text"
-                            id="number"
-                            value={number}
-                            onChange={handleNumberChange}
-                            required
-                            pattern="[0-9]*"
-                            inputMode="numeric"
-                            className="w-full px-6 py-4 text-2xl font-semibold bg-white/5 border-2 border-white/10 rounded-2xl focus:outline-none focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 transition-all duration-300 hover:border-white/20 text-white placeholder:text-white/30 tracking-widest text-center"
-                            placeholder="1234"
-                        />
+                        <SetNumberInput />
                     </div>
 
                     <button

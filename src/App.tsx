@@ -4,7 +4,7 @@ import joinMatchImage from "./assets/join-match.jpg";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4">
       {/* Fondo con efecto de desenfoque */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
       
@@ -18,7 +18,7 @@ function App() {
       {/* Banner de bienvenida */}
       <div className="relative py-20 mb-8">
         <div className="max-w-4xl mx-auto text-center px-4">
-          <h1 className="text-6xl md:text-7xl font-black mb-6">
+          <h1 className="text-5xl md:text-7xl font-black mb-6">
             <span className="text-gradient animate-pulse drop-shadow-lg">¡Bienvenido al Juego!</span>
           </h1>
           <p className="text-gray-100 text-xl md:text-2xl max-w-2xl mx-auto font-medium">Prepárate para una experiencia única de juego multijugador</p>
@@ -26,7 +26,7 @@ function App() {
       </div>
 
       {/* Contenedor de tarjetas */}
-      <div className="relative flex-grow flex items-center justify-center p-8">
+      <div className="relative flex-grow flex items-center justify-center">
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl w-full">
           <Link
             to="/create"

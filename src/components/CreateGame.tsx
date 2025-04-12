@@ -31,7 +31,7 @@ export function CreateGame() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4"
              style={{
                 backgroundImage: `url(${createMatchBg})`,
                 backgroundSize: 'cover',

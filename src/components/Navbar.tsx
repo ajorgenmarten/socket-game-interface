@@ -20,7 +20,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
             <h1 className="text-2xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
-              NumeritosGame
+              Numeritos
             </h1>
           </div>
           <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10 transition-all duration-300 hover:bg-white/15">
@@ -28,7 +28,7 @@ export function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-white/90 font-medium">{activeUsers} usuarios activos</span>
+            <span className="text-white/90 font-medium text-xs">{activeUsers} usuarios activos</span>
           </div>
         </div>
       </div>
