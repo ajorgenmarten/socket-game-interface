@@ -39,8 +39,8 @@ function App() {
               alt="Crear partida"
               className="w-full h-80 object-cover brightness-75 group-hover:brightness-90 transition-all duration-300"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-              <h2 className="text-white text-4xl font-bold text-center mb-4 drop-shadow-lg bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 group-hover:backdrop-blur-xl transition duration-300">
+              <h2 className="text-white text-4xl font-bold text-center mb-4 drop-shadow-lg bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text group-hover:text-transparent">
                 Crear Partida
               </h2>
               <p className="text-gray-200 text-center text-lg mb-6 max-w-md">
@@ -61,8 +61,8 @@ function App() {
               alt="Unirse a partida"
               className="w-full h-80 object-cover brightness-75 group-hover:brightness-90 transition-all duration-300"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-              <h2 className="text-white text-4xl font-bold text-center mb-4 drop-shadow-lg bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 group-hover:backdrop-blur-xl transition duration-300">
+              <h2 className="text-white text-4xl font-bold text-center mb-4 drop-shadow-lg bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text group-hover:text-transparent">
                 Unirse a Partida
               </h2>
               <p className="text-gray-200 text-center text-lg mb-6 max-w-md">
