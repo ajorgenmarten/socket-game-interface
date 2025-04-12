@@ -1,37 +1,26 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { SetNumber as SetNumberSocket } from '../Test';
 import joinMatchBg from '../assets/join-match.jpg';
 import { SetNumberInput } from './SetNumberInput';
+import { useGame } from '../providers/GameProvider';
 
 export function SetNumber() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [number] = useState('');
+    const [isValid, setIsValid] = useState(false)
+    const { setNumber } = useGame()
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!isValidNumber(number)) {
-            alert('El número debe tener 4 dígitos diferentes y no puede comenzar con 0');
-            return;
-        }
         setIsLoading(true);
-        try {
-            await SetNumberSocket("", number);
-        } finally {
-            setIsLoading(false);
-        }
+        setNumber(e)
     };
 
-    const isValidNumber = (num: string) => {
-        if (num.length !== 4) return false;
-        if (num[0] === '0') return false;
-        const digits = new Set(num.split(''));
-        return digits.size === 4;
-    };
+    const handleOnchange = (number: string) => {
+        setIsValid(() => number.length == 4)
+    }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900"
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4"
              style={{
                 backgroundImage: `url(${joinMatchBg})`,
                 backgroundSize: 'cover',
@@ -67,13 +56,13 @@ export function SetNumber() {
                         <label htmlFor="number" className="block text-lg font-medium text-white/90">
                             Tu Número Secreto
                         </label>
-                        <SetNumberInput />
+                        <SetNumberInput name='number' onChange={handleOnchange} />
                     </div>
 
                     <button
                         type="submit"
-                        disabled={isLoading || !isValidNumber(number)}
-                        className={`w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-5 px-8 rounded-2xl font-bold text-xl hover:from-purple-600 hover:to-indigo-600 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 ${(isLoading || !isValidNumber(number)) ? 'opacity-75 cursor-not-allowed' : ''}`}
+                        disabled={isLoading || !isValid}
+                        className={`w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-5 px-8 rounded-2xl font-bold text-xl hover:from-purple-600 hover:to-indigo-600 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 ${(isLoading || !isValid) ? 'opacity-75 cursor-not-allowed' : ''}`}
                     >
                         {isLoading ? (
                             <>
@@ -81,7 +70,7 @@ export function SetNumber() {
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                <span>Configurando...</span>
+                                <span>Esperando por rival...</span>
                             </>
                         ) : 'Establecer Número'}
                     </button>

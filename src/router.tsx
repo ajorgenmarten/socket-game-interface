@@ -6,11 +6,17 @@ import { JoinGame } from "./components/JoinGame";
 import { SetNumber } from "./components/SetNumber";
 import { GameLose } from "./components/GameLose";
 import { GameWin } from "./components/GameWin";
+import { Game } from "./components/Game";
+import { GameProvider } from "./providers/GameProvider";
 
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <GameProvider>
+        <Layout />
+      </GameProvider>
+    ),
     children: [
       {
         index: true,
@@ -35,6 +41,10 @@ const routes: RouteObject[] = [
       {
         path: "winner",
         element: <GameWin />,
+      },
+      {
+        path: "game",
+        element: <Game />,
       }
     ],
   },

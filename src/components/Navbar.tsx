@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react";
-import { socket } from "../socket";
+import { useGame } from "../providers/GameProvider";
 
 export function Navbar() {
-  const [activeUsers, setActiveUsers] = useState(0);
-
-  useEffect(() => {
-    socket.on("users_count", (count: number) => {
-      setActiveUsers(count);
-    });
-
-    return () => {
-      socket.off("users_count");
-    };
-  }, []);
+  const { activePlayers } = useGame()
 
   return (
     <nav className="sticky w-full top-0 left-0 z-50 backdrop-blur-md bg-black/20">
@@ -28,7 +17,7 @@ export function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-white/90 font-medium text-xs">{activeUsers} usuarios activos</span>
+            <span className="text-white/90 font-medium text-xs">{activePlayers} usuarios activos</span>
           </div>
         </div>
       </div>

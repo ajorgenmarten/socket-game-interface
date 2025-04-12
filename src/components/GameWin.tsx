@@ -4,7 +4,7 @@ export function GameWin() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-yellow-600 via-amber-600 to-orange-600">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-yellow-600 via-amber-600 to-orange-600 p-4">
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
             
             {/* Animated particles */}

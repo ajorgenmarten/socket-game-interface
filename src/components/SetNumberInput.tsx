@@ -23,7 +23,7 @@ export function SetNumberInput (props: SetNumberInputProps) {
        props.onChange?.(e.target.value)
     }
     return <label className="relative grid grid-cols-4 gap-2 max-w-full text-xl font-bold">
-        <input type="text" onFocus={onFocus} onBlur={onBlur} onChange={onChange} value={value} className="opacity-0 absolute" minLength={4} maxLength={4} required disabled={props.disabled} />
+        <input type="text" name={props.name} onFocus={onFocus} onBlur={onBlur} onChange={onChange} value={value} className="opacity-0 absolute" minLength={4} maxLength={4} required disabled={props.disabled} />
         <div className="flex items-center justify-center aspect-square border-2 border-primary/70 rounded-xl">
             { values[0] && values[0] }
             { length == 0 && focused && <Caret /> }
@@ -48,6 +48,7 @@ function Caret() {
 }
 
 interface SetNumberInputProps {
+    name?: string
     onChange?: (number: string) => void
     disabled?: boolean
 }

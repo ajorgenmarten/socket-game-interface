@@ -1,25 +1,20 @@
 import { FormEvent, useState } from 'react';
-import { JoinGame as JoinGameSocket } from '../Test';
 import joinMatchBg from '../assets/join-match.jpg';
 import { useNavigate } from 'react-router';
+import { useGame } from '../providers/GameProvider';
 
 export function JoinGame() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [code, setCode] = useState('');
+    const { joinGame } = useGame()
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
         setIsLoading(true);
-        try {
-            await JoinGameSocket(code);
-        } finally {
-            setIsLoading(false);
-        }
+        joinGame(e)
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900"
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 p-4"
              style={{
                 backgroundImage: `url(${joinMatchBg})`,
                 backgroundSize: 'cover',
@@ -54,8 +49,6 @@ export function JoinGame() {
                         <input
                             type="text"
                             id="code"
-                            value={code}
-                            onChange={(e) => setCode(e.target.value)}
                             required
                             className="w-full px-6 py-4 text-2xl font-semibold bg-white/5 border-2 border-white/10 rounded-2xl focus:outline-none focus:border-teal-400/50 focus:ring-2 focus:ring-teal-400/20 transition-all duration-300 hover:border-white/20 text-white placeholder:text-white/30"
                             placeholder="Ingresa el código de la partida"

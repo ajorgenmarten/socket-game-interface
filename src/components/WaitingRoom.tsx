@@ -16,7 +16,7 @@ export function WaitingRoom({ code, onCancel }: WaitingRoomProps) {
     }, []);
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 p-4">
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
             
             {/* Animated particles */}

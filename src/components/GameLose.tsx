@@ -4,7 +4,7 @@ export function GameLose() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 p-4">
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
             
             {/* Animated particles */}

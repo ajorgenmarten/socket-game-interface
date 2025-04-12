@@ -1,33 +1,22 @@
 import { FormEvent, useState } from 'react';
-import { CreateGame as CreateGameSocket } from '../Test';
 import createMatchBg from '../assets/create-match.jpg';
 import { useNavigate } from 'react-router';
 import { WaitingRoom } from './WaitingRoom';
+import { useGame } from '../providers/GameProvider';
 
 export function CreateGame() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [code, setCode] = useState('');
-    const [isWaiting, setIsWaiting] = useState(false);
+    const { gameCode, gameFull, createGame, finishGame } = useGame()
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
         setIsLoading(true);
-        try {
-            await CreateGameSocket(code);
-            setIsWaiting(true);
-        } finally {
-            setIsLoading(false);
-        }
+        createGame(e);
     };
 
-    const handleCancelWaiting = () => {
-        setIsWaiting(false);
-        setCode('');
-    };
-
-    if (isWaiting) {
-        return <WaitingRoom code={code} onCancel={handleCancelWaiting} />;
+    if (gameCode && !gameFull) {
+        return <WaitingRoom code={gameCode} onCancel={finishGame} />;
     }
 
     return (
