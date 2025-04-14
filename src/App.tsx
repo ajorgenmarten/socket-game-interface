@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import createMatchImage from "./assets/create-match.jpg";
-import joinMatchImage from "./assets/join-match.jpg";
 
 function App() {
   return (
@@ -35,7 +33,7 @@ function App() {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30 group-hover:opacity-75 transition-opacity duration-300"></div>
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm group-hover:bg-black/30 transition-all duration-300"></div>
             <img
-              src={createMatchImage}
+              src="/create.jpg"
               alt="Crear partida"
               className="w-full h-80 object-cover brightness-75 group-hover:brightness-90 transition-all duration-300"
             />
@@ -57,7 +55,7 @@ function App() {
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/30 to-teal-600/30 group-hover:opacity-75 transition-opacity duration-300"></div>
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm group-hover:bg-black/30 transition-all duration-300"></div>
             <img
-              src={joinMatchImage}
+              src="/join.jpg"
               alt="Unirse a partida"
               className="w-full h-80 object-cover brightness-75 group-hover:brightness-90 transition-all duration-300"
             />

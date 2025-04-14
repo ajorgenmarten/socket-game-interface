@@ -78,7 +78,6 @@ export function useGameProviderHook() {
     }
 
     /* LISTENNERS OF SOCKET */
-
     function listenOnlineStatus(status: string) {
         setActivePlayers(() => status)
     }
