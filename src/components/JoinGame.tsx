@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react';
-import joinMatchBg from '../assets/join-match.jpg';
 import { useNavigate } from 'react-router';
 import { useGame } from '../providers/GameProvider';
 
@@ -16,7 +15,7 @@ export function JoinGame() {
     return (
         <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 p-4"
              style={{
-                backgroundImage: `url(${joinMatchBg})`,
+                backgroundImage: `url(/join.jpg})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'soft-light'

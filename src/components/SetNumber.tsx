@@ -1,6 +1,5 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
-import joinMatchBg from '../assets/join-match.jpg';
 import { SetNumberInput } from './SetNumberInput';
 import { useGame } from '../providers/GameProvider';
 
@@ -22,7 +21,7 @@ export function SetNumber() {
     return (
         <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 p-4"
              style={{
-                backgroundImage: `url(${joinMatchBg})`,
+                backgroundImage: `url(/join.jpg)`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'soft-light'
