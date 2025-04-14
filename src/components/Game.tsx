@@ -32,14 +32,14 @@ export function Game() {
 
                 <form onSubmit={onSubmit} className="mb-8">
                     <div className="mb-4">
-                        <SetNumberInput name="number" />
+                        <SetNumberInput name="number"/>
                     </div>
                     <button
                         type="submit"
                         disabled={!isMyTurn}
                         className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 px-6 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transform hover:-translate-y-0.5 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        Adivianr
+                        Adivinar
                     </button>
                 </form>
 
@@ -47,27 +47,34 @@ export function Game() {
                     <div className="bg-white/5 p-4 rounded-xl">
                         <h3 className="text-xl font-bold text-white mb-3">Tus Intentos</h3>
                         <div className="space-y-2">
-                            {notes.map((note, index) => (
-                                <div key={index} className="bg-white/10 p-3 rounded-lg flex justify-between items-center">
-                                    <span className="text-white font-medium">{note[0]}</span>
-                                    <span className="text-green-400 font-bold">{note[1]} {note[1] == 0 ? '❌' : '✅'} aciertos</span>
-                                </div>
-                            ))}
+                            {notes.map((note, index) => <DrawAttempts key={index} number={note[0]} asserts={note[1]} />)}
                         </div>
                     </div>
                     <div className="bg-white/5 p-4 rounded-xl">
                         <h3 className="text-xl font-bold text-white mb-3">Intentos Rival</h3>
                         <div className="space-y-2">
-                            {rivalNotes.map((note, index) => (
-                                <div key={index} className="bg-white/10 p-3 rounded-lg flex justify-between items-center">
-                                    <span className="text-white font-medium">{note[0]}</span>
-                                    <span className="text-green-400 font-bold">{note[1]} {note[1] == 0 ? '❌' : '✅'}</span>
-                                </div>
-                            ))}
+                            {rivalNotes.map((note, index) => <DrawAttempts key={index} number={note[0]} asserts={note[1]} />)}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
+}
+
+function DrawAttempts(props: DrawAttemptsProps) {
+    const numbersArray = props.number.split('')
+    const assertEmoji = props.asserts == 0 ? '❌' : '✅'
+    const sqareClass: HTMLDivElement['className'] = "size-6 flex items-center justify-center border border-white/20 rounded-md"
+    return <div className="bg-white/10 p-2 rounded-md flex justify-between items-center">
+        <span className="text-white font-medium flex gap-1 items-center">
+            {numbersArray.map((number, index) => <div key={index} className={sqareClass}>{number}</div>)}
+        </span>
+        <span className="text-emerald-500 font-bold">{props.asserts}{assertEmoji}</span>
+    </div>
+}
+
+interface DrawAttemptsProps {
+    asserts: number;
+    number: string;
 }
