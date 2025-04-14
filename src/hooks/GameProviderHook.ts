@@ -98,6 +98,7 @@ export function useGameProviderHook() {
     }
     function listenRivalDisconnected() {
         reset()
+        navigate('/')
     }
     function listenNumberSetted() {
         setNumberIsSetted(() => true)
